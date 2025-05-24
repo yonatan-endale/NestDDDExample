@@ -1,4 +1,3 @@
-import { User } from '../../domain/entities/user.entity';
 import {
   Entity,
   PrimaryKey,
@@ -6,11 +5,12 @@ import {
   ManyToMany,
   Collection,
 } from '@mikro-orm/core';
+import { User } from './user.persistence.entity';
 
 @Entity({ tableName: 'roles' })
 export class Role {
-  @PrimaryKey()
-  id!: number;
+  @PrimaryKey('uuid')
+  id!: string;
 
   @Property()
   name!: string;
@@ -20,6 +20,18 @@ export class Role {
 
   @Property({ type: 'text' })
   permissions: string[] = [];
+
+  @Property()
+  updatedAt: Date;
+
+  @Property()
+  createdAt: Date;
+
+  @Property()
+  createdBy: string;
+
+  @Property()
+  updatedBy: string;
 
   @ManyToMany(() => User, (user) => user.roles)
   users = new Collection<User>(this);

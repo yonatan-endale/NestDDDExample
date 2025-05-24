@@ -2,20 +2,11 @@ import { Role } from 'src/Auth/domain/entities/role.entity';
 
 export abstract class TRoleRepository {
   abstract findPermissions(id: string): Promise<string[]>;
-  abstract createRole(
-    name: string,
-    permissions: string[],
-    description?: string,
-  ): Promise<void>;
-  abstract updateRole(
-    id: string,
-    name: string,
-    permissions: string[],
-    description?: string,
-  ): Promise<boolean>;
-  abstract deleteRole(id: string): Promise<void>;
-  abstract findRole(id: string): Promise<Role>;
+  abstract createRole(role: Role): Role;
+  abstract updateRole(role: Role): Promise<Role | null>;
+  abstract deleteRole(id: string): Promise<boolean>;
+  abstract findRole(id: string): Promise<Role | null>;
   abstract findAllRoles(): Promise<Role[]>;
-  abstract findRoleByName(name: string): Promise<Role>;
-  abstract findRoleById(id: string): Promise<Role>;
+  abstract findRoleByName(name: string): Promise<Role | null>;
+  abstract findRoleById(id: string): Promise<Role | null>;
 }

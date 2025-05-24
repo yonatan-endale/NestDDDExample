@@ -9,6 +9,7 @@ export class User extends Entity {
     public readonly email: string,
     public readonly firstName: string,
     public readonly lastName: string,
+    public readonly role: Role[] = [],
   ) {
     super(id);
   }
